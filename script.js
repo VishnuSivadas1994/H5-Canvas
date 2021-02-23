@@ -13,21 +13,21 @@ window.addEventListener('resize', function () {
 
 
 const mouse = {
-    x: null,
-    y: null
+    x: undefined,
+    y: undefined
 }
 //mouse click event listener
 canvas.addEventListener('click', function (event) {
     mouse.x = event.x;
     mouse.y = event.y;
-    drawCircle();
+    //drawCircle();
 
 });
 //mouse movement event listener
 canvas.addEventListener('mousemove', function (event) {
     mouse.x = event.x;
     mouse.y = event.y;
-    drawCircle();
+    //drawCircle();
 
 });
 
@@ -42,6 +42,13 @@ function drawCircle() {
     //ctx.stroke();
     ctx.fill();
 }
+
+function animate(){
+    //ctx.clearRect(0, 0 ,canvas.width, canvas.height);//clearing the specified area(coord1, coord2, width, height)
+    drawCircle();
+    requestAnimationFrame(animate);
+}
+animate();
 
 
 
