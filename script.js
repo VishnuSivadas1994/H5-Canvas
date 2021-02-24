@@ -31,7 +31,7 @@ canvas.addEventListener('click', function (event) {
 canvas.addEventListener('mousemove', function (event) {
     mouse.x = event.x;
     mouse.y = event.y;
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 5; i++) {
         particleArray.push(new Particle());
     }
     //drawCircle();
@@ -75,6 +75,21 @@ function handleParticles() {
     for (let i = 0; i < particleArray.length; i++) {
         particleArray[i].update();
         particleArray[i].draw();
+        for (let j = i; j < particleArray.length; j++) {
+            //pythagorean theorem
+            const dx = particleArray[i].x - particleArray[j].x;
+            const dy = particleArray[i].y - particleArray[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < 100) {
+                ctx.beginPath();
+                ctx.strokeStyle = particleArray[i].color;
+                ctx.lineWidth = 0.2;
+                ctx.moveTo(particleArray[i].x, particleArray[i].y);
+                ctx.lineTo(particleArray[j].x, particleArray[j].y);
+                ctx.stroke();
+                
+            }
+        }
         if (particleArray[i].size <= 0.3) {
             particleArray.splice(i, 1);
             i--;
@@ -84,9 +99,9 @@ function handleParticles() {
 
 
 function animate() {
-    //ctx.clearRect(0, 0, canvas.width, canvas.height);//clearing the specified area(coord1, coord2, width, height)
-    ctx.fillStyle = 'rgba(0,0,0,0.02)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);//clearing the specified area(coord1, coord2, width, height)
+    //ctx.fillStyle = 'rgba(0,0,0,0.02)';
+    //ctx.fillRect(0, 0, canvas.width, canvas.height);
     handleParticles();
     hue += 5;
     requestAnimationFrame(animate);
