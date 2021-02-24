@@ -1,6 +1,8 @@
 const canvas = document.getElementById('canvas1'); //get the canvas tag from html
 const ctx = canvas.getContext('2d'); //create a canvas 2D context
 const particleArray = [];
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 let hue = 0;
 
 window.addEventListener('resize', function () {
